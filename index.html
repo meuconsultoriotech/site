@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Consultório</title>
+<meta name="description" content="Organizamos o consultório de psicólogos e terapeutas autônomos usando o que você já tem: seu drive, seu e-mail, sua agenda e sua IA. Implantação em uma tarde e suporte mensal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,50&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F7F3; --ink:#17302B; --ink-2:#4A5F59; --sage:#3E7160; --mist:#DCE8DF; --amber:#B8862E; --line:#C9D6CE;
+  --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif; --mono:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--paper)}
+body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--sage)}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+header{padding:28px 0}
+header .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.brand{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--sage)}
+header nav a{text-decoration:none;color:var(--ink-2);font-size:15px;margin-left:22px}
+header nav a:hover{color:var(--ink)}
+
+.hero{padding:56px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:start}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,5.2vw,60px);line-height:1.04;letter-spacing:-.02em;margin:0 0 24px;max-width:14ch}
+.lead{font-size:20px;color:var(--ink-2);max-width:46ch;margin:0 0 32px}
+.cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:600;font-size:16px}
+.cta:hover{background:var(--sage)}
+.cta-note{display:block;margin-top:12px;font-size:14px;color:var(--ink-2)}
+
+/* a pasta */
+.folder{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px 26px;font-family:var(--mono);font-size:13.5px;line-height:1.75;color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.folder .path{font-family:var(--sans);font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
+.folder ul{list-style:none;margin:0;padding:0}
+.folder ul ul{padding-left:22px}
+.folder li{white-space:nowrap}
+.folder .d::before{content:"▸ ";color:var(--sage)}
+.folder .f::before{content:"· ";color:var(--line)}
+.folder .k{color:var(--sage);font-weight:600}
+.folder .cur{background:var(--mist);border-radius:4px;padding:0 6px;margin-left:-6px}
+.folder .cur::after{content:"▍";color:var(--amber);animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.folder .cur::after{animation:none}}
+.folder .muted{color:var(--ink-2)}
+.caption{font-size:14px;color:var(--ink-2);margin:12px 4px 0;max-width:52ch}
+
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.4vw,38px);letter-spacing:-.015em;line-height:1.1;margin:0 0 28px;max-width:22ch}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;align-items:start}
+.prose p{max-width:62ch;margin:0 0 18px}
+.prose p:last-child{margin-bottom:0}
+
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s;max-width:62ch}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:48px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0;padding-top:0}
+ol.steps li::before{content:counter(s);font-family:var(--serif);font-size:34px;line-height:1;color:var(--sage);font-weight:500}
+ol.steps h3{margin:4px 0 6px;font-size:19px;font-weight:600}
+ol.steps p{margin:0;color:var(--ink-2)}
+
+table{border-collapse:collapse;width:100%;max-width:62ch;font-size:16px}
+th,td{text-align:left;padding:12px 14px 12px 0;border-top:1px solid var(--line);vertical-align:top}
+tr:first-child th,tr:first-child td{border-top:0}
+th{font-weight:600;width:38%;color:var(--ink)}
+td{color:var(--ink-2)}
+
+.who ul{margin:0;padding:0;list-style:none;max-width:62ch}
+.who li{padding:10px 0 10px 26px;position:relative;color:var(--ink-2)}
+.who li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:12px;border-radius:50%;background:var(--mist);border:2px solid var(--sage)}
+.who li strong{color:var(--ink);font-weight:600}
+
+.contact{background:var(--ink);color:#fff;border-top:0}
+.contact h2{color:#fff}
+.contact p{color:#D5E0DA;max-width:52ch}
+.contact a.mail{color:#fff;font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);text-decoration:none;border-bottom:2px solid var(--amber);letter-spacing:-.01em}
+.contact a.mail:hover{border-color:#fff}
+footer{padding:28px 0 40px;font-size:14px;color:var(--ink-2)}
+footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
+
+@media (max-width:860px){
+  .hero .wrap,.two{grid-template-columns:1fr;gap:32px}
+  .hero{padding:32px 0 48px}
+  section{padding:48px 0}
+  header nav{display:none}
+  .folder{font-size:12.5px;padding:16px 16px 18px;overflow-x:auto}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="brand" href="/">Meu Consultório<span>.tech</span></a>
+    <nav><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#quem">Para quem</a><a href="#contato">Contato</a></nav>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Seu consultório, organizado com o que você já usa.</h1>
+      <p class="lead">Drive, e-mail, agenda, Trello e a sua IA de sempre. Nenhum programa novo. Em uma tarde, sua pasta vira um consultório que a IA entende e você encontra tudo.</p>
+      <a class="cta" href="mailto:contato@meuconsultorio.tech?subject=Quero%20conhecer%20o%20Meu%20Consult%C3%B3rio">Escrever para a gente</a>
+      <span class="cta-note">Respondemos em um dia útil. Sem compromisso.</span>
+    </div>
+    <div>
+      <div class="folder" aria-label="Exemplo da pasta Meu Consultório">
+        <div class="path">Meu Consultório</div>
+        <ul>
+          <li class="d">00 LEIA PRIMEIRO.md</li>
+          <li class="d">Consultório
+            <ul>
+              <li class="d">10 Empresa <span class="muted">CRP, alvará, recibos, contador</span></li>
+              <li class="d">20 Pacientes
+                <ul>
+                  <li class="d"><span class="k">P-001</span></li>
+                  <li class="d"><span class="k">P-002</span>
+                    <ul>
+                      <li class="f">contrato.pdf</li>
+                      <li class="f"><span class="cur">2026.10.21-1500 - resumo sessão.md</span></li>
+                    </ul>
+                  </li>
+                  <li class="d"><span class="k">P-003</span></li>
+                </ul>
+              </li>
+              <li class="d">35 Projetos <span class="muted">empresas, seleções, mentorias</span></li>
+              <li class="d">40 Modelos</li>
+              <li class="d">50 Mídias sociais</li>
+              <li class="d">60 Formação</li>
+            </ul>
+          </li>
+          <li class="d">Pessoal <span class="muted">a sua vida, fora do consultório</span></li>
+        </ul>
+      </div>
+      <p class="caption">Paciente é código. O nome fica só com você, numa chave que nem a IA lê.</p>
+    </div>
+  </div>
+</div>
+
+<section id="oque">
+  <div class="wrap two">
+    <h2>Não é um programa. É o seu consultório arrumado.</h2>
+    <div class="prose">
+      <p>Você já tem tudo: um drive cheio de arquivos, um e-mail, uma agenda, talvez o ChatGPT ou o Claude. O que falta é estrutura, e é isso que a gente instala: uma pasta com lugar para cada coisa, regras que a sua IA segue sozinha, e um quadro simples para ver quem está em atendimento, quem pagou, quem precisa de recibo.</p>
+      <p>Nada é apagado nem movido. Sua pasta antiga continua igual; a nova nasce ao lado, organizada. Você usa uma semana e decide.</p>
+      <p>Feito por quem organizou o consultório de uma psicóloga de verdade, e viu que o problema de todo autônomo é o mesmo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap two">
+    <h2>Como funciona</h2>
+    <ol class="steps">
+      <li><div><h3>Uma conversa</h3><p>Meia hora por vídeo. Que ferramentas você usa, se atende no CPF ou tem empresa, se faz conteúdo, se tem contador. Só isso.</p></div></li>
+      <li><div><h3>A implantação</h3><p>Duas horas, com você presente, pelo seu computador. A pasta é criada, seus arquivos são copiados para o lugar certo, pacientes viram códigos, os quadros ficam prontos. Você sai com tudo funcionando.</p></div></li>
+      <li><div><h3>O dia a dia</h3><p>Acabou a sessão, você dita um resumo e a IA arquiva. Ela lembra o paciente, prepara o pacote do contador no fim do mês, rascunha o post. Você só revisa.</p></div></li>
+      <li><div><h3>O suporte</h3><p>Uma mensalidade pequena. Quando algo trava, a gente resolve remotamente. Quando o kit melhora, você recebe a atualização sem fazer nada.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section id="fica">
+  <div class="wrap two">
+    <h2>O que fica com você, e só com você</h2>
+    <table>
+      <tr><th>Conteúdo clínico</th><td>Fica no seu computador. Não vai para card, e-mail nem resumo para terceiros.</td></tr>
+      <tr><th>Nome dos pacientes</th><td>Só numa chave local. Em tudo o mais, o paciente é P-001.</td></tr>
+      <tr><th>Sua pasta original</th><td>Intocada. Nada é apagado; o que não serve vai para uma pasta "para deletar" que só você esvazia.</td></tr>
+      <tr><th>Suas contas</th><td>Continuam suas. Não criamos logins em seu nome nem guardamos senhas.</td></tr>
+      <tr><th>Conduta clínica</th><td>A IA organiza e redige. Diagnóstico, hipótese e intervenção são seus.</td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="quem" class="who">
+  <div class="wrap two">
+    <h2>Para quem</h2>
+    <ul>
+      <li><strong>Psicólogos e terapeutas autônomos</strong>, no CPF ou com empresa, que atendem no consultório ou online.</li>
+      <li><strong>Quem também faz projeto</strong>: outplacement, avaliação em seleção, mentoria, programa para empresa. O kit separa o que é clínica do que é projeto.</li>
+      <li><strong>Quem produz conteúdo</strong> e perde ideias por falta de um lugar para elas.</li>
+      <li><strong>Quem já usa IA</strong> e quer que ela entenda o consultório em vez de responder no vazio.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <div class="wrap">
+    <h2>Quer ver como ficaria o seu?</h2>
+    <p>Escreva contando como está hoje: o que você usa, o que te irrita. A gente responde com uma proposta de pasta, antes de qualquer conversa sobre valor.</p>
+    <a class="mail" href="mailto:contato@meuconsultorio.tech?subject=Quero%20conhecer%20o%20Meu%20Consult%C3%B3rio">contato@meuconsultorio.tech</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Meu Consultório · Rio de Janeiro</span>
+    <span>Nada aqui substitui o julgamento clínico do profissional.</span>
+  </div>
+</footer>
+</body>
+</html>
