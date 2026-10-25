@@ -134,6 +134,42 @@ h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,5vw,56px);line-
 .legend span{display:flex;align-items:center;gap:6px}
 .legend i{width:14px;height:8px;border-radius:3px;display:block}
 
+
+/* agenda */
+.cal-sec .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:48px;align-items:start}
+.cal-sec .wrap>div{min-width:0}
+.cal{font-family:var(--win);font-size:12px;color:#1f2a28}
+.cal-top{display:flex;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid #E6E6E6;background:#fff}
+.cal-top .today{border:1px solid #DADCE0;border-radius:4px;padding:5px 12px;font-weight:500}
+.cal-top .nav{color:#5f6368;letter-spacing:6px}
+.cal-top .month{font-size:17px;font-weight:400;color:#3c4043}
+.cal-top .view{margin-left:auto;border:1px solid #DADCE0;border-radius:4px;padding:5px 10px;color:#3c4043}
+.cal-grid{display:grid;grid-template-columns:44px repeat(5,1fr);background:#fff}
+.cal-grid .dh{text-align:center;padding:8px 0 6px;border-bottom:1px solid #E6E6E6;border-left:1px solid #E6E6E6;color:#70757a;font-size:10.5px;text-transform:uppercase;letter-spacing:.4px}
+.cal-grid .dh b{display:block;font-size:20px;font-weight:400;color:#3c4043;letter-spacing:0;margin-top:2px}
+.cal-grid .dh.today b{background:#1a73e8;color:#fff;width:32px;height:32px;line-height:32px;border-radius:50%;margin:2px auto 0}
+.cal-grid .dh:first-child{border-left:0;border-bottom:1px solid #E6E6E6}
+.cal-grid .hcol{position:relative;border-left:0}
+.cal-grid .col{position:relative;border-left:1px solid #E6E6E6;height:400px;background-image:linear-gradient(#EEE 1px,transparent 1px);background-size:100% 47px}
+.cal-grid .hcol span{position:absolute;right:6px;font-size:10px;color:#70757a;transform:translateY(-50%)}
+.ev{position:absolute;left:3px;right:3px;border-radius:5px;padding:4px 7px;font-size:11.5px;line-height:1.25;color:#fff;overflow:hidden;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.ev small{display:block;opacity:.9;font-size:10.5px}
+.ev.base{background:#1A73E8}.ev.conf{background:#33B679}.ev.done{background:#0B8043}.ev.off{background:#616161;text-decoration:line-through}.ev.miss{background:#D50000}.ev.pj{background:#8E24AA}.ev.pess{background:#E8EAED;color:#3c4043}
+.cal-legend{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-2)}
+.cal-legend span{display:flex;align-items:center;gap:6px}
+.cal-legend i{width:12px;height:12px;border-radius:3px;display:block}
+/* Outlook */
+.ol .cal-top{background:#0F6CBD;color:#fff;border-bottom:0}
+.ol .cal-top .today{border-color:rgba(255,255,255,.6);color:#fff}
+.ol .cal-top .month{color:#fff}
+.ol .cal-top .nav{color:#fff}
+.ol .cal-top .view{border-color:rgba(255,255,255,.6);color:#fff}
+.ol .cal-grid .dh{text-transform:none;letter-spacing:0;font-size:11.5px;color:#424242}
+.ol .cal-grid .dh b{font-size:16px;font-weight:600}
+.ol .cal-grid .dh.today b{background:#0F6CBD;width:28px;height:28px;line-height:28px}
+.ol .ev{border-radius:3px;border-left:4px solid rgba(0,0,0,.25)}
+.ol .ev.base{background:#CFE4FA;color:#0F3B6B}.ol .ev.conf{background:#CAEAD8;color:#0E5A33}.ol .ev.done{background:#5B9F6F;color:#fff}.ol .ev.off{background:#E1E1E1;color:#555}.ol .ev.miss{background:#F7C5C5;color:#7A1A1A}.ol .ev.pj{background:#E4D1F0;color:#4B1D6B}
+
 section{padding:64px 0;border-top:1px solid var(--line)}
 h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.4vw,38px);letter-spacing:-.015em;line-height:1.1;margin:0 0 28px;max-width:22ch}
 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;align-items:start}
@@ -167,7 +203,8 @@ footer{padding:28px 0 40px;font-size:14px;color:var(--ink-2)}
 footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 
 @media (max-width:900px){
-  .hero .wrap,.two,.board-sec .wrap{grid-template-columns:1fr;gap:32px}
+  .hero .wrap,.two,.board-sec .wrap,.cal-sec .wrap{grid-template-columns:1fr;gap:32px}
+  .cal-wrap{overflow-x:auto}.cal{min-width:560px}
   .hero{padding:24px 0 48px}
   section{padding:48px 0}
   header nav{display:none}
@@ -185,7 +222,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 <header>
   <div class="wrap">
     <a class="brand" href="/">MeuConsultório<span>.Tech</span></a>
-    <nav><a href="#quadro">O quadro</a><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#contato">Contato</a></nav>
+    <nav><a href="#quadro">O quadro</a><a href="#agenda">A agenda</a><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#contato">Contato</a></nav>
   </div>
 </header>
 
@@ -305,7 +342,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
       <h2>E um quadro para ver o consultório inteiro de uma vez.</h2>
       <div class="prose">
         <p>Quem está em atendimento, quem pausou, quem recebeu alta. Quem é online, quem é particular, quem ainda não pagou o mês. É o mesmo quadro de cartões que você talvez já use para outras coisas; a gente só combina as colunas e as etiquetas.</p>
-        <p>O cartão guarda o estado. A pasta guarda o conteúdo. O que é clínico nunca entra no cartão.</p>
+        <p>A pasta guarda o conteúdo. O cartão guarda o estado. A agenda, logo abaixo, guarda o tempo. O que é clínico só existe na pasta.</p>
       </div>
     </div>
     <div>
@@ -336,11 +373,37 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
+
+<section id="agenda" class="cal-sec">
+  <div class="wrap">
+    <div>
+      <h2>E a agenda que você já usa vira a linha do tempo do consultório.</h2>
+      <div class="prose">
+        <p>Google Agenda ou Outlook, a que você já tem no celular. Cada sessão é um evento com o código do paciente, nunca o nome. A cor diz o que aconteceu: confirmada, realizada, desmarcada, falta.</p>
+        <p>A IA lê a agenda pelo conector que já existe. Quando você diz "a das 15h desmarcou", ela ajusta a agenda, o cartão e a ficha, e no fim do mês confere se agenda, cartões e recibos batem.</p>
+      </div>
+    </div>
+    <div>
+      <div class="os-toggle" role="group" aria-label="Ver como fica no">
+        <button type="button" data-cal="g" aria-pressed="true">Google Agenda</button>
+        <button type="button" data-cal="o" aria-pressed="false">Outlook</button>
+      </div>
+      <div class="cal-wrap">
+      <div class="win cal" id="cal" aria-label="Exemplo da agenda da semana">
+        <div class="cal-top"><span class="today">Hoje</span><span class="nav">‹ ›</span><span class="month">Outubro de 2026</span><span class="view">Semana ▾</span></div>
+        <div class="cal-grid"><div class="dh" style="border-left:0"></div><div class="dh">seg<b>19</b></div><div class="dh">ter<b>20</b></div><div class="dh">qua<b>21</b></div><div class="dh today">qui<b>22</b></div><div class="dh">sex<b>23</b></div><div class="hcol" style="height:400px"><span style="top:47px">9:00</span><span style="top:94px">10:00</span><span style="top:141px">11:00</span><span style="top:188px">12:00</span><span style="top:235px">13:00</span><span style="top:282px">14:00</span><span style="top:329px">15:00</span><span style="top:376px">16:00</span></div><div class="col"><div class="ev done" style="top:47px;height:44px">Sessão P-001<small>9:00</small></div><div class="ev done" style="top:141px;height:44px">Sessão P-003<small>11:00</small></div><div class="ev pess" style="top:235px;height:44px">Almoço</div><div class="ev off" style="top:329px;height:44px">Desmarcada · Sessão P-004<small>15:00</small></div></div><div class="col"><div class="ev done" style="top:94px;height:44px">Sessão P-002<small>10:00</small></div><div class="ev pj" style="top:282px;height:66px">Encontro P-006 · PJ-001<small>14:00–15:30</small></div></div><div class="col"><div class="ev done" style="top:47px;height:44px">Sessão P-001<small>9:00</small></div><div class="ev miss" style="top:141px;height:44px">Falta · Sessão P-003<small>11:00</small></div><div class="ev pess" style="top:376px;height:44px">Dentista</div></div><div class="col"><div class="ev conf" style="top:94px;height:44px">Sessão P-002<small>10:00</small></div><div class="ev base" style="top:329px;height:44px">Primeira conversa<small>15:00 · prospecto</small></div></div><div class="col"><div class="ev base" style="top:47px;height:44px">Sessão P-001<small>9:00</small></div><div class="ev base" style="top:141px;height:44px">Sessão P-003<small>11:00</small></div></div></div>
+      </div>
+      </div>
+      <div class="cal-legend"><span><i style="background:#1A73E8"></i>Marcada</span><span><i style="background:#33B679"></i>Confirmada</span><span><i style="background:#0B8043"></i>Realizada</span><span><i style="background:#616161"></i>Desmarcada</span><span><i style="background:#D50000"></i>Falta</span><span><i style="background:#8E24AA"></i>Projeto</span><span><i style="background:#E8EAED"></i>Pessoal: a IA não lê</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="oque">
   <div class="wrap two">
     <h2>Não é um programa. É o seu consultório arrumado.</h2>
     <div class="prose">
-      <p>Você já tem tudo: uma pasta cheia de arquivos, um e-mail, uma agenda, talvez o ChatGPT ou o Claude. O que falta é estrutura, e é isso que a gente instala: uma pasta com lugar para cada coisa, regras que a sua IA segue sozinha, e um quadro simples para ver quem está em atendimento, quem pagou, quem precisa de recibo.</p>
+      <p>Você já tem tudo: uma pasta cheia de arquivos, uma agenda, um e-mail, talvez um quadro de cartões, talvez o ChatGPT ou o Claude. O que falta é estrutura, e é isso que a gente instala: três telas que você já conhece (pasta, quadro, agenda) combinadas por regras que a sua IA segue sozinha.</p>
       <p>Nada é apagado nem movido. Sua pasta antiga continua igual; a nova nasce ao lado, organizada. Você usa uma semana e decide.</p>
       <p>Feito por quem organizou o consultório de uma psicóloga de verdade, e viu que o problema de todo autônomo é o mesmo.</p>
     </div>
@@ -353,7 +416,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
     <ol class="steps">
       <li><div><h3>Uma conversa</h3><p>Meia hora por vídeo. Que ferramentas você usa, se atende no CPF ou tem empresa, se faz conteúdo, se tem contador. Só isso.</p></div></li>
       <li><div><h3>A implantação</h3><p>Duas horas, com você presente, pelo seu computador. A pasta é criada, seus arquivos são copiados para o lugar certo, pacientes viram códigos, o quadro fica pronto. Você sai com tudo funcionando.</p></div></li>
-      <li><div><h3>O dia a dia</h3><p>Acabou a sessão, você dita um resumo e a IA arquiva. Ela lembra o paciente, prepara o pacote do contador no fim do mês, rascunha o post. Você só revisa.</p></div></li>
+      <li><div><h3>O dia a dia</h3><p>Acabou a sessão, você dita um resumo e a IA arquiva, marca a sessão como realizada na agenda e atualiza o cartão. Ela lembra o paciente de amanhã, prepara o pacote do contador no fim do mês, rascunha o post. Você só revisa.</p></div></li>
       <li><div><h3>O suporte</h3><p>Uma mensalidade pequena. Quando algo trava, a gente resolve remotamente. Quando o método melhora, você recebe a atualização sem fazer nada.</p></div></li>
     </ol>
   </div>
@@ -363,8 +426,8 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   <div class="wrap two">
     <h2>O que fica com você, e só com você</h2>
     <table class="perim">
-      <tr><th>Conteúdo clínico</th><td>Fica no seu computador. Não vai para cartão, e-mail nem resumo para terceiros.</td></tr>
-      <tr><th>Nome dos pacientes</th><td>Só numa chave local. Em tudo o mais, o paciente é P-001.</td></tr>
+      <tr><th>Conteúdo clínico</th><td>Fica no seu computador. Não vai para cartão, agenda, e-mail nem resumo para terceiros.</td></tr>
+      <tr><th>Nome dos pacientes</th><td>Só numa chave local. Na agenda, no cartão e na pasta, o paciente é P-001.</td></tr>
       <tr><th>Sua pasta original</th><td>Intocada. Nada é apagado; o que não serve vai para uma pasta "para deletar" que só você esvazia.</td></tr>
       <tr><th>Suas contas</th><td>Continuam suas. Não criamos logins em seu nome nem guardamos senhas.</td></tr>
       <tr><th>Conduta clínica</th><td>A IA organiza e redige. Diagnóstico, hipótese e intervenção são seus.</td></tr>
@@ -412,6 +475,11 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   var saved=null;try{saved=localStorage.getItem('os')}catch(e){}
   if(!saved){saved=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent)?'mac':'win'}
   show(saved);
+  var cb=document.querySelectorAll('.os-toggle button[data-cal]'),cal=document.getElementById('cal');
+  function showCal(k){cb.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.cal===k?'true':'false')});cal.classList.toggle('ol',k==='o');try{localStorage.setItem('cal',k)}catch(e){}}
+  cb.forEach(function(b){b.addEventListener('click',function(){showCal(b.dataset.cal)})});
+  var sc=null;try{sc=localStorage.getItem('cal')}catch(e){}
+  showCal(sc||(saved==='win'?'o':'g'));
 })();
 </script>
 </body>
