@@ -4,18 +4,23 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MeuConsultório.Tech</title>
-<meta name="description" content="Organizamos o consultório de psicólogos e terapeutas autônomos usando o que você já tem: seu drive, seu e-mail, sua agenda e sua IA. Implantação em uma tarde e suporte mensal.">
+<meta name="description" content="Organizamos o consultório de psicólogos e terapeutas autônomos usando o que você já tem: sua pasta, seu e-mail, sua agenda, seu quadro e sua IA. Implantação em uma tarde e suporte mensal.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,50&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#F5F7F3; --ink:#17302B; --ink-2:#4A5F59; --sage:#3E7160; --mist:#DCE8DF; --amber:#B8862E; --line:#C9D6CE;
-  --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif; --mono:ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+  --paper:#F4F8F6; --ink:#1B3330; --ink-2:#4D6460; --sage:#3F7563; --mist:#DDEBE4; --amber:#B8862E; --line:#CBD9D2;
+  --serif:"Fraunces",Georgia,serif; --sans:"Instrument Sans",system-ui,sans-serif;
+  --win:"Segoe UI Variable","Segoe UI",system-ui,sans-serif; --mac:-apple-system,"SF Pro Text","Helvetica Neue",system-ui,sans-serif;
 }
 *{box-sizing:border-box}
+.hero .wrap>div,.board-sec .wrap>div,.two>div{min-width:0}
+.w-main{overflow-x:auto}
+.w-tools{white-space:nowrap;overflow:hidden}
+.lists{min-width:0}
 html{background:var(--paper)}
-body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:hidden;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.55;font-size:17px;-webkit-font-smoothing:antialiased}
 a{color:var(--sage)}
 a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
@@ -26,29 +31,108 @@ header .wrap{display:flex;justify-content:space-between;align-items:baseline;gap
 header nav a{text-decoration:none;color:var(--ink-2);font-size:15px;margin-left:22px}
 header nav a:hover{color:var(--ink)}
 
-.hero{padding:56px 0 72px}
-.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:start}
-h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,5.2vw,60px);line-height:1.04;letter-spacing:-.02em;margin:0 0 24px;max-width:14ch}
-.lead{font-size:20px;color:var(--ink-2);max-width:46ch;margin:0 0 32px}
+.hero{padding:48px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:48px;align-items:center}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(36px,5vw,56px);line-height:1.05;letter-spacing:-.02em;margin:0 0 22px;max-width:14ch}
+.lead{font-size:19px;color:var(--ink-2);max-width:44ch;margin:0 0 30px}
 .cta{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:600;font-size:16px}
 .cta:hover{background:var(--sage)}
 .cta-note{display:block;margin-top:12px;font-size:14px;color:var(--ink-2)}
 
-/* a pasta */
-.folder{background:#fff;border:1px solid var(--line);border-radius:10px;padding:22px 24px 26px;font-family:var(--mono);font-size:13.5px;line-height:1.75;color:var(--ink);box-shadow:0 1px 0 var(--line)}
-.folder .path{font-family:var(--sans);font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:12px}
-.folder ul{list-style:none;margin:0;padding:0}
-.folder ul ul{padding-left:22px}
-.folder li{white-space:nowrap}
-.folder .d::before{content:"▸ ";color:var(--sage)}
-.folder .f::before{content:"· ";color:var(--line)}
-.folder .k{color:var(--sage);font-weight:600}
-.folder .cur{background:var(--mist);border-radius:4px;padding:0 6px;margin-left:-6px}
-.folder .cur::after{content:"▍";color:var(--amber);animation:blink 1.2s steps(2) infinite}
-@keyframes blink{50%{opacity:0}}
-@media (prefers-reduced-motion:reduce){.folder .cur::after{animation:none}}
-.folder .muted{color:var(--ink-2)}
-.caption{font-size:14px;color:var(--ink-2);margin:12px 4px 0;max-width:52ch}
+/* alternância Windows / Mac */
+.os-toggle{display:flex;gap:6px;background:#E7EFEA;border-radius:999px;padding:4px;width:max-content;margin:0 0 14px auto}
+.os-toggle button{border:0;background:transparent;font:600 13px var(--sans);color:var(--ink-2);padding:7px 16px;border-radius:999px;cursor:pointer}
+.os-toggle button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(27,51,48,.12)}
+.shot{display:none}
+.shot.on{display:block}
+.caption{font-size:14px;color:var(--ink-2);margin:12px 4px 0;max-width:60ch}
+
+/* janela genérica */
+.win{background:#fff;border-radius:10px;border:1px solid #D2DCD7;box-shadow:0 14px 40px rgba(27,51,48,.12),0 1px 2px rgba(27,51,48,.08);overflow:hidden;font-size:12.5px;color:#1f2a28;line-height:1.35}
+.win svg{vertical-align:-3px;flex:none}
+.row{display:flex;align-items:center;gap:8px}
+.ico-folder{width:16px;height:16px}
+.ico-file{width:16px;height:16px}
+
+/* Windows */
+.w-win{font-family:var(--win)}
+.w-title{height:34px;display:flex;align-items:center;justify-content:space-between;padding:0 0 0 12px;background:#F3F3F3;border-bottom:1px solid #E5E5E5}
+.w-title .tab{display:flex;align-items:center;gap:8px;background:#fff;height:28px;margin-top:6px;padding:0 12px;border-radius:7px 7px 0 0;font-size:12px;border:1px solid #E5E5E5;border-bottom:0}
+.w-ctrl{display:flex}
+.w-ctrl span{width:46px;height:34px;display:grid;place-items:center;font-size:11px;color:#333}
+.w-ctrl span:last-child:hover{background:#C42B1C;color:#fff}
+.w-tools{display:flex;gap:18px;align-items:center;padding:8px 14px;border-bottom:1px solid #EDEDED;font-size:12px;color:#333}
+.w-tools b{font-weight:500}
+.w-tools .sep{width:1px;height:18px;background:#E0E0E0}
+.w-addr{display:flex;gap:10px;align-items:center;padding:8px 12px;border-bottom:1px solid #EDEDED}
+.w-addr .nav{color:#777;letter-spacing:2px}
+.w-addr .path{flex:1;border:1px solid #DADADA;border-radius:4px;padding:5px 10px;background:#fff;display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden}
+.w-addr .path i{color:#999;font-style:normal}
+.w-addr .search{width:150px;flex:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border:1px solid #DADADA;border-radius:4px;padding:5px 10px;color:#888}
+.w-body{display:grid;grid-template-columns:168px 1fr;min-height:280px}
+.w-nav{border-right:1px solid #EDEDED;padding:8px 0;background:#FAFAFA}
+.w-nav div{padding:4px 10px;display:flex;gap:7px;align-items:center;white-space:nowrap;color:#222}
+.w-nav .l1{padding-left:22px}.w-nav .l2{padding-left:36px}.w-nav .l3{padding-left:50px}
+.w-nav .sel{background:#E5EFF9;border-radius:4px;margin:0 6px;padding-left:44px}
+.w-nav .mute{color:#777;padding-left:10px}
+.w-main{padding:6px 10px}
+.w-main table{width:100%;border-collapse:collapse}
+.w-main th{text-align:left;font-weight:400;color:#666;font-size:11.5px;padding:4px 8px;border-bottom:1px solid #EDEDED}
+.w-main td{padding:5px 8px;white-space:nowrap}
+.w-main tr.sel td{background:#E5EFF9}
+.w-main td.dim{color:#666}
+.w-status{border-top:1px solid #EDEDED;padding:4px 12px;font-size:11.5px;color:#555;display:flex;justify-content:space-between}
+
+/* Mac */
+.m-win{font-family:var(--mac);border-radius:12px}
+.m-top{display:flex;align-items:center;gap:10px;padding:10px 12px;background:linear-gradient(#F2F2F2,#E9E9E9);border-bottom:1px solid #D8D8D8}
+.m-lights{display:flex;gap:8px;margin-right:6px}
+.m-lights i{width:12px;height:12px;border-radius:50%;display:block}
+.m-lights i:nth-child(1){background:#FF5F57}.m-lights i:nth-child(2){background:#FEBC2E}.m-lights i:nth-child(3){background:#28C840}
+.m-top .nav{color:#999;letter-spacing:4px;font-size:14px}
+.m-top .ttl{font-weight:600;color:#333;display:flex;gap:6px;align-items:center;flex:1;justify-content:center}
+.m-top .views{display:flex;gap:2px;border:1px solid #CFCFCF;border-radius:6px;overflow:hidden}
+.m-top .views span{width:26px;height:20px;display:grid;place-items:center;font-size:11px;color:#555}
+.m-top .views span.on{background:#D7D7D7}
+.m-top .search{width:140px;border:1px solid #CFCFCF;border-radius:6px;padding:3px 8px;background:#fff;color:#999;font-size:11.5px}
+.m-body{display:grid;grid-template-columns:136px minmax(0,1fr);min-height:280px}
+.m-side{background:#F5F5F5;border-right:1px solid #E3E3E3;padding:10px 6px}
+.m-side h6{margin:8px 8px 2px;font-size:10.5px;color:#8a8a8a;font-weight:600}
+.m-side div{padding:3px 8px;border-radius:5px;display:flex;gap:7px;align-items:center;white-space:nowrap;color:#333}
+.m-side .sel{background:#DCDCDC}
+.m-cols{display:grid;grid-template-columns:1.2fr .9fr 1.2fr;overflow:hidden;min-width:0}
+.m-col{border-right:1px solid #E8E8E8;padding:6px 0;min-width:0}
+.m-col:last-child{border-right:0}
+.m-col div{padding:3px 8px 3px 10px;display:flex;gap:6px;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#222;justify-content:space-between}
+.m-col div span{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m-col div em{color:#9a9a9a;font-style:normal;font-size:11px}
+.m-col .sel{background:#2E6FEF;color:#fff}.m-col .sel em{color:#D9E4FF}
+.m-col .sel2{background:#E8E8E8}
+.m-status{border-top:1px solid #E3E3E3;padding:4px 12px;font-size:11px;color:#777;text-align:center}
+
+/* quadro */
+.board-sec .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:48px;align-items:start}
+.board{background:#E9F2EE;border-radius:12px;padding:14px;overflow:hidden;font-family:var(--win);border:1px solid #D2DCD7}
+.board-h{display:flex;align-items:center;gap:14px;padding:2px 4px 12px;font-size:14px;font-weight:600;color:#1f2a28}
+.board-h .pill{font-weight:500;font-size:11.5px;color:#4D6460;background:#fff;border-radius:4px;padding:2px 8px}
+.board-h .av{margin-left:auto;display:flex}
+.board-h .av i{width:24px;height:24px;border-radius:50%;background:#B8862E;border:2px solid #E9F2EE;margin-left:-6px;display:block}
+.board-h .av i:nth-child(2){background:#3F7563}
+.lists{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow-x:auto}
+.list{background:#F6F8F7;border-radius:10px;padding:8px;font-size:12.5px}
+.list h5{margin:2px 6px 8px;font-size:12.5px;font-weight:600;color:#2a3532;display:flex;justify-content:space-between}
+.list h5 small{font-weight:400;color:#7a8783}
+.card{background:#fff;border-radius:8px;padding:8px 10px;margin-bottom:8px;box-shadow:0 1px 1px rgba(9,30,66,.18)}
+.card .lbl{display:flex;gap:4px;margin-bottom:6px;flex-wrap:wrap}
+.card .lbl i{height:8px;min-width:30px;border-radius:4px;display:block}
+.lb-on{background:#579DFF}.lb-pres{background:#9F8FEF}.lb-part{background:#4BCE97}.lb-conv{background:#F5CD47}.lb-rec{background:#FEA362}.lb-pend{background:#F87168}.lb-pj{background:#8C9BAB}
+.card .t{font-weight:500;color:#172b4d}
+.card .m{display:flex;gap:10px;margin-top:6px;font-size:11px;color:#626f86}
+.card .m b{font-weight:500;background:#E9F2EE;border-radius:3px;padding:0 5px;color:#1f2a28}
+.list .add{color:#7a8783;padding:4px 6px}
+.legend{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px 16px;font-size:13px;color:var(--ink-2)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:8px;border-radius:3px;display:block}
 
 section{padding:64px 0;border-top:1px solid var(--line)}
 h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.4vw,38px);letter-spacing:-.015em;line-height:1.1;margin:0 0 28px;max-width:22ch}
@@ -63,11 +147,11 @@ ol.steps li::before{content:counter(s);font-family:var(--serif);font-size:34px;l
 ol.steps h3{margin:4px 0 6px;font-size:19px;font-weight:600}
 ol.steps p{margin:0;color:var(--ink-2)}
 
-table{border-collapse:collapse;width:100%;max-width:62ch;font-size:16px}
-th,td{text-align:left;padding:12px 14px 12px 0;border-top:1px solid var(--line);vertical-align:top}
-tr:first-child th,tr:first-child td{border-top:0}
-th{font-weight:600;width:38%;color:var(--ink)}
-td{color:var(--ink-2)}
+table.perim{border-collapse:collapse;width:100%;max-width:62ch;font-size:16px}
+.perim th,.perim td{text-align:left;padding:12px 14px 12px 0;border-top:1px solid var(--line);vertical-align:top}
+.perim tr:first-child th,.perim tr:first-child td{border-top:0}
+.perim th{font-weight:600;width:38%;color:var(--ink)}
+.perim td{color:var(--ink-2)}
 
 .who ul{margin:0;padding:0;list-style:none;max-width:62ch}
 .who li{padding:10px 0 10px 26px;position:relative;color:var(--ink-2)}
@@ -77,17 +161,23 @@ td{color:var(--ink-2)}
 .contact{background:var(--ink);color:#fff;border-top:0}
 .contact h2{color:#fff}
 .contact p{color:#D5E0DA;max-width:52ch}
-.contact a.mail{color:#fff;font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);text-decoration:none;border-bottom:2px solid var(--amber);letter-spacing:-.01em}
+.contact a.mail{color:#fff;font-family:var(--serif);font-size:clamp(24px,3.4vw,40px);text-decoration:none;border-bottom:2px solid var(--amber);letter-spacing:-.01em;word-break:break-all}
 .contact a.mail:hover{border-color:#fff}
 footer{padding:28px 0 40px;font-size:14px;color:var(--ink-2)}
 footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 
-@media (max-width:860px){
-  .hero .wrap,.two{grid-template-columns:1fr;gap:32px}
-  .hero{padding:32px 0 48px}
+@media (max-width:900px){
+  .hero .wrap,.two,.board-sec .wrap{grid-template-columns:1fr;gap:32px}
+  .hero{padding:24px 0 48px}
   section{padding:48px 0}
   header nav{display:none}
-  .folder{font-size:12.5px;padding:16px 16px 18px;overflow-x:auto}
+  .os-toggle{margin-left:0}
+  .win{font-size:11.5px}
+  .w-body{grid-template-columns:1fr}.w-nav{display:none}
+  .m-body{grid-template-columns:1fr}.m-side{display:none}
+  .m-cols{grid-template-columns:repeat(3,170px);overflow-x:auto}
+  .w-addr .search,.m-top .search{display:none}
+  .lists{grid-template-columns:repeat(4,170px)}
 }
 </style>
 </head>
@@ -95,7 +185,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 <header>
   <div class="wrap">
     <a class="brand" href="/">MeuConsultório<span>.Tech</span></a>
-    <nav><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#quem">Para quem</a><a href="#contato">Contato</a></nav>
+    <nav><a href="#quadro">O quadro</a><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#contato">Contato</a></nav>
   </div>
 </header>
 
@@ -104,49 +194,153 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   <div class="wrap">
     <div>
       <h1>Seu consultório, organizado com o que você já usa.</h1>
-      <p class="lead">Drive, e-mail, agenda, Trello e a sua IA de sempre. Nenhum programa novo. Em uma tarde, sua pasta vira um consultório que a IA entende e você encontra tudo.</p>
+      <p class="lead">A pasta que você já tem, o e-mail, a agenda, o quadro e a sua IA de sempre. Nenhum programa novo. Em uma tarde, tudo ganha lugar e a IA passa a entender o seu consultório.</p>
       <a class="cta" href="mailto:contato@meuconsultorio.tech?subject=Quero%20conhecer%20o%20MeuConsult%C3%B3rio.Tech">Escrever para a gente</a>
       <span class="cta-note">Respondemos em um dia útil. Sem compromisso.</span>
     </div>
     <div>
-      <div class="folder" aria-label="Exemplo da pasta Meu Consultório">
-        <div class="path">Meu Consultório</div>
-        <ul>
-          <li class="d">00 LEIA PRIMEIRO.md</li>
-          <li class="d">Consultório
-            <ul>
-              <li class="d">10 Empresa <span class="muted">CRP, alvará, recibos, contador</span></li>
-              <li class="d">20 Pacientes
-                <ul>
-                  <li class="d"><span class="k">P-001</span></li>
-                  <li class="d"><span class="k">P-002</span>
-                    <ul>
-                      <li class="f">contrato.pdf</li>
-                      <li class="f"><span class="cur">2026.10.21-1500 - resumo sessão.md</span></li>
-                    </ul>
-                  </li>
-                  <li class="d"><span class="k">P-003</span></li>
-                </ul>
-              </li>
-              <li class="d">35 Projetos <span class="muted">empresas, seleções, mentorias</span></li>
-              <li class="d">40 Modelos</li>
-              <li class="d">50 Mídias sociais</li>
-              <li class="d">60 Formação</li>
-            </ul>
-          </li>
-          <li class="d">Pessoal <span class="muted">a sua vida, fora do consultório</span></li>
-        </ul>
+      <div class="os-toggle" role="group" aria-label="Ver como fica no">
+        <button type="button" data-os="win" aria-pressed="true">Windows</button>
+        <button type="button" data-os="mac" aria-pressed="false">Mac</button>
       </div>
-      <p class="caption">Paciente é código. O nome fica só com você, numa chave que nem a IA lê.</p>
+
+      <!-- Windows -->
+      <div class="shot on" data-shot="win">
+      <div class="win w-win" aria-label="Como a pasta aparece no Explorador de Arquivos">
+        <div class="w-title">
+          <div class="tab"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#F7C948" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#E0AE2B" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>20 Pacientes</div>
+          <div class="w-ctrl"><span>—</span><span>☐</span><span>✕</span></div>
+        </div>
+        <div class="w-tools"><b>⊕ Novo</b><span class="sep"></span>✂ &nbsp; ⧉ &nbsp; ⇄ &nbsp; ⌫<span class="sep"></span>↕ Classificar &nbsp; ☷ Exibir &nbsp; ⋯</div>
+        <div class="w-addr"><span class="nav">‹ › ↑</span><div class="path"><i>›</i> OneDrive <i>›</i> Meu Consultório <i>›</i> Consultório <i>›</i> 20 Pacientes</div><div class="search">Pesquisar em 20 Pacientes</div></div>
+        <div class="w-body">
+          <div class="w-nav">
+            <div class="mute">⌂ Início</div>
+            <div class="mute">▦ Galeria</div>
+            <div>☁ OneDrive</div>
+            <div class="l1">▾ Meu Consultório</div>
+            <div class="l2">▾ Consultório</div>
+            <div class="l3">10 Empresa</div>
+            <div class="sel">20 Pacientes</div>
+            <div class="l3">35 Projetos</div>
+            <div class="l3">40 Modelos</div>
+            <div class="l3">50 Mídias sociais</div>
+            <div class="l3">60 Formação</div>
+            <div class="l2">› Pessoal</div>
+            <div class="mute">▤ Área de Trabalho</div>
+            <div class="mute">⤓ Downloads</div>
+          </div>
+          <div class="w-main">
+            <table>
+              <tr><th>Nome</th><th>Data de modificação</th><th>Tipo</th></tr>
+              <tr><td><span class="row"><svg class="ico-file" viewBox="0 0 16 16"><path fill="#fff" stroke="#9AA3A0" d="M3.5 1.5h6l3 3v10h-9z"/><path fill="none" stroke="#3F7563" d="M5 7h6M5 9.5h6M5 12h4"/></svg>00 LEIA PRIMEIRO</span></td><td class="dim">21/10/2026 15:02</td><td class="dim">Documento</td></tr>
+              <tr><td><span class="row"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#F7C948" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#E0AE2B" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>P-001</span></td><td class="dim">24/10/2026 10:15</td><td class="dim">Pasta de arquivos</td></tr>
+              <tr class="sel"><td><span class="row"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#F7C948" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#E0AE2B" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>P-002</span></td><td class="dim">Hoje 15:00</td><td class="dim">Pasta de arquivos</td></tr>
+              <tr><td><span class="row"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#F7C948" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#E0AE2B" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>P-003</span></td><td class="dim">22/10/2026 18:40</td><td class="dim">Pasta de arquivos</td></tr>
+              <tr><td><span class="row"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#F7C948" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#E0AE2B" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>P-004</span></td><td class="dim">20/10/2026 09:30</td><td class="dim">Pasta de arquivos</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="w-status"><span>5 itens &nbsp;|&nbsp; 1 item selecionado</span><span>☷ ▦</span></div>
+      </div>
+      </div>
+
+      <!-- Mac -->
+      <div class="shot" data-shot="mac">
+      <div class="win m-win" aria-label="Como a pasta aparece no Finder">
+        <div class="m-top">
+          <div class="m-lights"><i></i><i></i><i></i></div>
+          <span class="nav">‹ ›</span>
+          <div class="ttl"><svg class="ico-folder" viewBox="0 0 16 16"><path fill="#6CB4F5" d="M1 3.5A1.5 1.5 0 0 1 2.5 2h3.6l1.6 1.5h5.8A1.5 1.5 0 0 1 15 5v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/><path fill="#4A9EEC" d="M1 6h14v6.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 12.5z"/></svg>P-002</div>
+          <div class="views"><span>▦</span><span>☰</span><span class="on">▥</span><span>▣</span></div>
+          <div class="search">⌕ Buscar</div>
+        </div>
+        <div class="m-body">
+          <div class="m-side">
+            <h6>Favoritos</h6>
+            <div>⏱ Recentes</div><div>⌂ Início</div><div>▤ Mesa</div><div>⤓ Downloads</div>
+            <h6>iCloud</h6>
+            <div>☁ iCloud Drive</div>
+            <div class="sel">▣ Meu Consultório</div>
+            <h6>Etiquetas</h6>
+            <div><i style="width:9px;height:9px;border-radius:50%;background:#3F7563;display:block"></i> Consultório</div>
+            <div><i style="width:9px;height:9px;border-radius:50%;background:#B8862E;display:block"></i> Pessoal</div>
+          </div>
+          <div class="m-cols">
+            <div class="m-col">
+              <div><span>📁 10 Empresa</span><em>›</em></div>
+              <div class="sel2"><span>📁 20 Pacientes</span><em>›</em></div>
+              <div><span>📁 35 Projetos</span><em>›</em></div>
+              <div><span>📁 40 Modelos</span><em>›</em></div>
+              <div><span>📁 50 Mídias sociais</span><em>›</em></div>
+              <div><span>📁 60 Formação</span><em>›</em></div>
+            </div>
+            <div class="m-col">
+              <div><span>📄 00 LEIA PRIMEIRO</span></div>
+              <div><span>📁 P-001</span><em>›</em></div>
+              <div class="sel"><span>📁 P-002</span><em>›</em></div>
+              <div><span>📁 P-003</span><em>›</em></div>
+              <div><span>📁 P-004</span><em>›</em></div>
+            </div>
+            <div class="m-col">
+              <div><span>📄 contrato</span></div>
+              <div><span>📄 ficha</span></div>
+              <div><span>📄 sessão 14 out</span></div>
+              <div><span>📄 sessão 21 out</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="m-status">4 itens, 2,1 GB disponíveis</div>
+      </div>
+      </div>
+
+      <p class="caption">É a sua pasta, no programa que você já abre todo dia. Paciente é código: o nome fica só com você, numa chave que nem a IA lê.</p>
     </div>
   </div>
 </div>
+
+<section id="quadro" class="board-sec">
+  <div class="wrap">
+    <div>
+      <h2>E um quadro para ver o consultório inteiro de uma vez.</h2>
+      <div class="prose">
+        <p>Quem está em atendimento, quem pausou, quem recebeu alta. Quem é online, quem é particular, quem ainda não pagou o mês. É o mesmo quadro de cartões que você talvez já use para outras coisas; a gente só combina as colunas e as etiquetas.</p>
+        <p>O cartão guarda o estado. A pasta guarda o conteúdo. O que é clínico nunca entra no cartão.</p>
+      </div>
+    </div>
+    <div>
+      <div class="board" aria-label="Exemplo do quadro Consultório">
+        <div class="board-h">Consultório <span class="pill">Área de trabalho</span><div class="av"><i></i><i></i></div></div>
+        <div class="lists">
+          <div class="list"><h5>Prospecto <small>1</small></h5>
+            <div class="card"><div class="lbl"><i class="lb-on"></i></div><div class="t">P-005</div><div class="m">📅 primeira conversa qui.</div></div>
+            <div class="add">+ Adicionar um cartão</div>
+          </div>
+          <div class="list"><h5>Em atendimento <small>3</small></h5>
+            <div class="card"><div class="lbl"><i class="lb-pres"></i><i class="lb-part"></i></div><div class="t">P-001</div><div class="m"><span>☑ 3/4</span></div></div>
+            <div class="card"><div class="lbl"><i class="lb-on"></i><i class="lb-part"></i><i class="lb-rec"></i></div><div class="t">P-002</div><div class="m"><span>☑ 4/4</span><span>💬 6</span></div></div>
+            <div class="card"><div class="lbl"><i class="lb-on"></i><i class="lb-conv"></i><i class="lb-pend"></i></div><div class="t">P-003</div><div class="m"><span>☑ 2/4</span></div></div>
+          </div>
+          <div class="list"><h5>Pausado <small>1</small></h5>
+            <div class="card"><div class="lbl"><i class="lb-pres"></i><i class="lb-part"></i></div><div class="t">P-004</div><div class="m">📅 retoma em nov.</div></div>
+          </div>
+          <div class="list"><h5>Alta <small>1</small></h5>
+            <div class="card"><div class="lbl"><i class="lb-on"></i><i class="lb-pj"></i></div><div class="t">P-006</div><div class="m"><b>PJ-001</b></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="lb-on"></i>Online</span><span><i class="lb-pres"></i>Presencial</span><span><i class="lb-part"></i>Particular</span><span><i class="lb-conv"></i>Convênio</span><span><i class="lb-rec"></i>Recibo pendente</span><span><i class="lb-pend"></i>Pagamento em aberto</span><span><i class="lb-pj"></i>Projeto</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="oque">
   <div class="wrap two">
     <h2>Não é um programa. É o seu consultório arrumado.</h2>
     <div class="prose">
-      <p>Você já tem tudo: um drive cheio de arquivos, um e-mail, uma agenda, talvez o ChatGPT ou o Claude. O que falta é estrutura, e é isso que a gente instala: uma pasta com lugar para cada coisa, regras que a sua IA segue sozinha, e um quadro simples para ver quem está em atendimento, quem pagou, quem precisa de recibo.</p>
+      <p>Você já tem tudo: uma pasta cheia de arquivos, um e-mail, uma agenda, talvez o ChatGPT ou o Claude. O que falta é estrutura, e é isso que a gente instala: uma pasta com lugar para cada coisa, regras que a sua IA segue sozinha, e um quadro simples para ver quem está em atendimento, quem pagou, quem precisa de recibo.</p>
       <p>Nada é apagado nem movido. Sua pasta antiga continua igual; a nova nasce ao lado, organizada. Você usa uma semana e decide.</p>
       <p>Feito por quem organizou o consultório de uma psicóloga de verdade, e viu que o problema de todo autônomo é o mesmo.</p>
     </div>
@@ -158,9 +352,9 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
     <h2>Como funciona</h2>
     <ol class="steps">
       <li><div><h3>Uma conversa</h3><p>Meia hora por vídeo. Que ferramentas você usa, se atende no CPF ou tem empresa, se faz conteúdo, se tem contador. Só isso.</p></div></li>
-      <li><div><h3>A implantação</h3><p>Duas horas, com você presente, pelo seu computador. A pasta é criada, seus arquivos são copiados para o lugar certo, pacientes viram códigos, os quadros ficam prontos. Você sai com tudo funcionando.</p></div></li>
+      <li><div><h3>A implantação</h3><p>Duas horas, com você presente, pelo seu computador. A pasta é criada, seus arquivos são copiados para o lugar certo, pacientes viram códigos, o quadro fica pronto. Você sai com tudo funcionando.</p></div></li>
       <li><div><h3>O dia a dia</h3><p>Acabou a sessão, você dita um resumo e a IA arquiva. Ela lembra o paciente, prepara o pacote do contador no fim do mês, rascunha o post. Você só revisa.</p></div></li>
-      <li><div><h3>O suporte</h3><p>Uma mensalidade pequena. Quando algo trava, a gente resolve remotamente. Quando o kit melhora, você recebe a atualização sem fazer nada.</p></div></li>
+      <li><div><h3>O suporte</h3><p>Uma mensalidade pequena. Quando algo trava, a gente resolve remotamente. Quando o método melhora, você recebe a atualização sem fazer nada.</p></div></li>
     </ol>
   </div>
 </section>
@@ -168,8 +362,8 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 <section id="fica">
   <div class="wrap two">
     <h2>O que fica com você, e só com você</h2>
-    <table>
-      <tr><th>Conteúdo clínico</th><td>Fica no seu computador. Não vai para card, e-mail nem resumo para terceiros.</td></tr>
+    <table class="perim">
+      <tr><th>Conteúdo clínico</th><td>Fica no seu computador. Não vai para cartão, e-mail nem resumo para terceiros.</td></tr>
       <tr><th>Nome dos pacientes</th><td>Só numa chave local. Em tudo o mais, o paciente é P-001.</td></tr>
       <tr><th>Sua pasta original</th><td>Intocada. Nada é apagado; o que não serve vai para uma pasta "para deletar" que só você esvazia.</td></tr>
       <tr><th>Suas contas</th><td>Continuam suas. Não criamos logins em seu nome nem guardamos senhas.</td></tr>
@@ -183,7 +377,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
     <h2>Para quem</h2>
     <ul>
       <li><strong>Psicólogos e terapeutas autônomos</strong>, no CPF ou com empresa, que atendem no consultório ou online.</li>
-      <li><strong>Quem também faz projeto</strong>: outplacement, avaliação em seleção, mentoria, programa para empresa. O kit separa o que é clínica do que é projeto.</li>
+      <li><strong>Quem também faz projeto</strong>: outplacement, avaliação em seleção, mentoria, programa para empresa. A pasta separa o que é clínica do que é projeto.</li>
       <li><strong>Quem produz conteúdo</strong> e perde ideias por falta de um lugar para elas.</li>
       <li><strong>Quem já usa IA</strong> e quer que ela entenda o consultório em vez de responder no vazio.</li>
     </ul>
@@ -205,5 +399,20 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
     <span>Nada aqui substitui o julgamento clínico do profissional.</span>
   </div>
 </footer>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.os-toggle button'),shots=document.querySelectorAll('.shot');
+  function show(os){
+    btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.os===os?'true':'false')});
+    shots.forEach(function(s){s.classList.toggle('on',s.dataset.shot===os)});
+    try{localStorage.setItem('os',os)}catch(e){}
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.os)})});
+  var saved=null;try{saved=localStorage.getItem('os')}catch(e){}
+  if(!saved){saved=/Mac|iPhone|iPad/.test(navigator.platform||navigator.userAgent)?'mac':'win'}
+  show(saved);
+})();
+</script>
 </body>
 </html>
