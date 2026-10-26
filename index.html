@@ -183,6 +183,18 @@ ol.steps li::before{content:counter(s);font-family:var(--serif);font-size:34px;l
 ol.steps h3{margin:4px 0 6px;font-size:19px;font-weight:600}
 ol.steps p{margin:0;color:var(--ink-2)}
 
+/* suporte remoto */
+.sup .dl{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px 26px 22px;max-width:62ch;margin:0 0 26px;box-shadow:0 10px 30px rgba(27,51,48,.07)}
+.sup .dl .cta{font-size:17px;padding:16px 26px}
+.sup .dl .cta svg{vertical-align:-4px;margin-right:10px}
+.sup .dl .alt{margin:14px 0 0;font-size:14px;color:var(--ink-2)}
+.sup .dl .alt a{margin-right:14px;white-space:nowrap}
+.sup .dl .ver{display:block;margin-top:10px;font-size:13px;color:var(--ink-2)}
+.sup .phone{display:none;background:var(--mist);border-radius:10px;padding:12px 16px;font-size:15px;margin:0 0 18px;max-width:62ch}
+.sup .phone.on{display:block}
+.sup .warn{border-left:3px solid var(--amber);padding:6px 0 6px 16px;max-width:62ch;color:var(--ink-2);margin:26px 0 0;font-size:15px}
+.sup .warn strong{color:var(--ink)}
+
 table.perim{border-collapse:collapse;width:100%;max-width:62ch;font-size:16px}
 .perim th,.perim td{text-align:left;padding:12px 14px 12px 0;border-top:1px solid var(--line);vertical-align:top}
 .perim tr:first-child th,.perim tr:first-child td{border-top:0}
@@ -222,7 +234,7 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
 <header>
   <div class="wrap">
     <a class="brand" href="/">MeuConsultório<span>.Tech</span></a>
-    <nav><a href="#quadro">O quadro</a><a href="#agenda">A agenda</a><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#contato">Contato</a></nav>
+    <nav><a href="#quadro">O quadro</a><a href="#agenda">A agenda</a><a href="#como">Como funciona</a><a href="#fica">O que fica com você</a><a href="#suporte">Suporte</a><a href="#contato">Contato</a></nav>
   </div>
 </header>
 
@@ -447,6 +459,32 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   </div>
 </section>
 
+<section id="suporte" class="sup">
+  <div class="wrap two">
+    <div>
+      <h2>Suporte remoto: você abre a porta, a gente entra.</h2>
+      <p class="caption" style="margin:0">Quando combinarmos de olhar o seu computador, é por aqui. O programa é o RustDesk, de código aberto, baixado direto da fonte oficial. Só você liga a conexão, e só enquanto quiser.</p>
+    </div>
+    <div>
+      <p class="phone" id="sup-phone">Você está no celular. Abra esta página no <strong>computador</strong> que o suporte vai olhar: <strong>meuconsultorio.tech/suporte</strong></p>
+      <div class="dl">
+        <a class="cta" id="sup-btn" href="#" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 19h16"/></svg><span id="sup-btn-txt">Baixar o programa de suporte</span>
+        </a>
+        <p class="alt">Outro sistema? <span id="sup-alts"></span></p>
+        <span class="ver" id="sup-ver"></span>
+      </div>
+      <ol class="steps">
+        <li><div><h3>Baixe e abra</h3><p>Clique no botão, abra o arquivo baixado e aceite instalar. Se o Windows mostrar um aviso azul, clique em <em>Mais informações</em> e depois em <em>Executar assim mesmo</em>: isso só vale para este arquivo, baixado desta página.</p></div></li>
+        <li><div><h3>Me diga o número</h3><p>O programa mostra um número de nove dígitos ("ID"). Leia para mim pelo telefone ou pelo WhatsApp. Não precisa de senha.</p></div></li>
+        <li><div><h3>Aceite a conexão</h3><p>Quando eu entrar, aparece um pedido na sua tela. Clique em <em>Aceitar</em>. Você vê tudo o que eu faço, o tempo todo.</p></div></li>
+        <li><div><h3>Para encerrar</h3><p>Clique em <em>Desconectar</em> na janela do programa, ou feche-o. A conexão acaba na hora e só volta se você aceitar de novo.</p></div></li>
+      </ol>
+      <p class="warn"><strong>Ninguém da nossa equipe liga pedindo para você instalar isso.</strong> O suporte é sempre combinado antes, por escrito. Se alguém telefonar mandando baixar um programa de acesso, desligue.</p>
+    </div>
+  </div>
+</section>
+
 <section id="contato" class="contact">
   <div class="wrap">
     <h2>Quer ver como ficaria o seu?</h2>
@@ -480,6 +518,29 @@ footer .wrap{display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
   cb.forEach(function(b){b.addEventListener('click',function(){showCal(b.dataset.cal)})});
   var sc=null;try{sc=localStorage.getItem('cal')}catch(e){}
   showCal(sc||(saved==='win'?'o':'g'));
+})();
+
+/* Suporte remoto: botão de download do RustDesk, versão FIXA, fonte oficial (GitHub do projeto).
+   Para atualizar a versão, mude só RD.v depois de conferir que os arquivos existem na release. */
+(function(){
+  var RD={v:'1.5.0',base:'https://github.com/rustdesk/rustdesk/releases/download/'};
+  var alvos={
+    win:{nome:'Windows',arq:'rustdesk-'+RD.v+'-x86_64.exe'},
+    macarm:{nome:'Mac (Apple Silicon)',arq:'rustdesk-'+RD.v+'-aarch64.dmg'},
+    macintel:{nome:'Mac (Intel)',arq:'rustdesk-'+RD.v+'-x86_64.dmg'}
+  };
+  function url(k){return RD.base+RD.v+'/'+alvos[k].arq}
+  var ua=navigator.userAgent||'',plat=navigator.platform||'';
+  var celular=/Android|iPhone|iPad|iPod|Mobile/i.test(ua)||(/Mac/.test(plat)&&navigator.maxTouchPoints>1);
+  var k='win';
+  if(/Mac/.test(plat)&&!celular){k='macarm'} /* Macs Intel novos são raros; o link Intel fica em "Outro sistema?" */
+  var btn=document.getElementById('sup-btn'),txt=document.getElementById('sup-btn-txt'),alts=document.getElementById('sup-alts'),ver=document.getElementById('sup-ver');
+  if(!btn)return;
+  if(celular){document.getElementById('sup-phone').classList.add('on')}
+  btn.href=url(k);btn.setAttribute('download','');
+  txt.textContent='Baixar o programa de suporte · '+alvos[k].nome;
+  alts.innerHTML=Object.keys(alvos).filter(function(x){return x!==k}).map(function(x){return '<a href="'+url(x)+'">'+alvos[x].nome+'</a>'}).join('');
+  ver.textContent='RustDesk '+RD.v+', baixado direto do site do projeto (github.com/rustdesk). Nada passa pelos nossos servidores.';
 })();
 </script>
 </body>
